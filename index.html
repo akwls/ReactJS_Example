@@ -28,19 +28,20 @@
         */
     </script>
     <script type="text/babel">
-        // JSX 사용하기
-        // JSX : JavaScript의 확장된 문법, React를 html 코드처럼 작성할 수 있게 해줌
-        // babel : JSX 코드를 createElement로 바꿔줌.
         const root = document.getElementById("root");
-        // state : JSX에서 상태를 저장하는 것
-        
+    
         // useState[0] = default Value
         // useState[1] = modifier
         // modifier(args) : default Value를 args로 변경
         function App() {
-            const [counter, modifier] = React.useState(0);
+            const [counter, setCounter] = React.useState(0);
             const onClick = () => {
-                modifier(counter+1);
+                // setCounter(counter+1);
+                setCounter(current => current+1);
+                // 현재 값을 보장할 수 있는 방법
+
+                // 만약 args가 이전 값과 다르면
+                // 그 부분만 re-render
             }
             return (
                 <div>
@@ -48,7 +49,7 @@
                     <button onClick={onClick}>Click me</button>
                 </div>
             )
-            }
+        }
 
         ReactDOM.render(<App />, root);
     </script>
