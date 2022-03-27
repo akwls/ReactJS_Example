@@ -33,7 +33,7 @@
         // babel : JSX 코드를 createElement로 바꿔줌.
         const root = document.getElementById("root");
 
-        const Title = (
+        const Title = () => (
             <h3 
                 id="title" 
                 onMouseEnter={()=>console.log("mouse Enter")}>
@@ -41,20 +41,27 @@
             </h3>
         );
 
-        const Button = (
+        const Button = () => (
             <button 
                 style={{
-                    backgroudColor: "tomato",
+                    backgroundColor: "tomato",
                 }}
                 onClick={()=>console.log("i'm clicked")}>
                 Click me!
             </button>
         );
 
-        const container = React.createElement("div", null, [Title, Button]);
+        // Component's first Letter MUST be a upper case.
+        // Components를 함수로 작성하면 다른 Component 안에 넣을 수 있다!
+        const Container = () => (
+            <div>
+                <Title />
+                <Button />
+            </div>
+        )
 
         // container를 root안에 넣기
-        ReactDOM.render(container, root);
+        ReactDOM.render(<Container />, root);
     </script>
     
 </html>
