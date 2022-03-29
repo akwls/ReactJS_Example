@@ -7,22 +7,32 @@
     <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script type="text/babel">
-        function Btn({text}) {
-            return <button style={{
-                backgroundColor: "tomato",
-                color: "white",
-                padding: "10px 20px",
-                border: 0,
-                borderRadius: "10px"
-
-            }}>{text}</button>
+        function Btn({text, changeValue}) {
+            console.log(text, " was re rendered");
+            return (
+                <button 
+                    onClick={changeValue}
+                    style={{
+                        backgroundColor: "tomato",
+                        color: "white",
+                        padding: "10px 20px",
+                        border: 0,
+                        borderRadius: "10px"
+                    }}
+                >{text}</button>
+            )
         }
 
+        // props가 변하지 않는다면 rendering 하지 않음.
+        const MemorizedBtn = React.memo(Btn)
+        
         function App() {
+            const [value, setValue] = React.useState("Save Changes");
+            const changeValue = () => setValue("Revert Changes");
             return (
                 <div>
-                    <Btn text="Save Changes"/>
-                    <Btn text="Continue"/>
+                    <MemorizedBtn text={value} changeValue={changeValue}/>
+                    <MemorizedBtn text="Continue"/>
                 </div>
             )
         }
